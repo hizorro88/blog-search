@@ -5,7 +5,7 @@ server:
   tomcat:
     accesslog:
       enabled: true
-      directory: /Users/jj
+      basedir: .
       prefix: localhost_access_log
       suffix: .txt
       pattern: "%h %l %u %t %r %s %b"
