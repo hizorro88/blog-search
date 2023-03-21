@@ -10,7 +10,6 @@ dependencies {
     implementation group: 'org.hibernate', name: 'hibernate-core', version: "${project.'hibernate.version'}"
     implementation group: 'org.hibernate', name: 'hibernate-spatial', version: "${project.'hibernate.version'}"
     
-    implementation group: 'org.locationtech.jts', name: 'jts-core', version: "${project.'jts.version'}"
 }
 
 jar {

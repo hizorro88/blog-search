@@ -28,7 +28,7 @@ public class BatchServiceImpl implements BatchService {
   ObjectMapper mapper = new ObjectMapper();
 
   @Override
-  @Scheduled(fixedDelay = KEYWORD_RANK_PERIOD) // 10초마다 실행
+  @Scheduled(fixedDelay = KEYWORD_RANK_PERIOD) // 1초마다 실행 (기능 검증을 위해 작게 설정함)
   public void aggregateRank() {
     List<Statistics> statisticsList = statisticsRepository.findTop10ByOrderByCountDesc();
 
