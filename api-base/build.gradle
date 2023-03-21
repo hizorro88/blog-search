@@ -1,0 +1,22 @@
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "com.fasterxml.jackson.core"
+    }
+    implementation("io.springfox:springfox-boot-starter:${project.'springSwagger.version'}") {
+        exclude group: "com.fasterxml.jackson.core"
+    }
+    implementation "org.hibernate.validator:hibernate-validator:${project.'hibernateValidator.version'}"
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:${project.'jasyptSpringBootStarter.version'}"
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: "${project.'hibernate.version'}"
+    implementation group: 'org.hibernate', name: 'hibernate-spatial', version: "${project.'hibernate.version'}"
+    
+    implementation group: 'org.locationtech.jts', name: 'jts-core', version: "${project.'jts.version'}"
+}
+
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = false
+}

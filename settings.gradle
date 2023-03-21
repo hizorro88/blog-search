@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
+
+rootProject.name = 'kakao-search'
+include 'common', 'api-base'
+include 'blog-service'

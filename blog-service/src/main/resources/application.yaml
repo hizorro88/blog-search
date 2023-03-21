@@ -1,0 +1,54 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: /Users/jj
+      prefix: localhost_access_log
+      suffix: .txt
+      pattern: "%h %l %u %t %r %s %b"
+      max-days: 7
+kakao:
+  key: ENC(g0Unz3ogVRGzl+zdy2A1ZKRC/OG8e5fbuyMIi6GGU1WlQr88QrQjd8buHAfcwzZ9)
+naver:
+  id: ENC(XuaoCEU2Iy8QnCobo0B+Xn3qlulgfwIEgV/uawtJVps=)
+  secret: ENC(so1hXNfgKOkOnmloWTskIE+uKpElpTx7)
+feign:
+  url:
+    kakao-search: https://dapi.kakao.com
+    naver-search: https://openapi.naver.com
+  client:
+    config:
+      default:
+        connectionTimeout: 2000
+        readTimeout: 12000
+        loggerLevel: FULL
+spring:
+  application:
+    name: blog-service
+  main:
+    allow-bean-definition-overriding: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/test
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # none, update, validate, create, create-drop
+    show-sql: false
+    defer-datasource-initialization: true
+  output:
+    ansi:
+      enabled: DETECT
+logging:
+  config: classpath:log4j2.yml
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor

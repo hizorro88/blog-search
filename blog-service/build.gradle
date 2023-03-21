@@ -1,0 +1,39 @@
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: "com.fasterxml.jackson.core"
+    }
+    implementation("io.springfox:springfox-boot-starter:${project.'springSwagger.version'}") {
+        exclude group: "com.fasterxml.jackson.core"
+    }
+    implementation "io.springfox:springfox-swagger-ui:${project.'springSwagger.version'}"
+
+    implementation "org.hibernate.validator:hibernate-validator:${project.'hibernateValidator.version'}"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    // H2
+    runtimeOnly 'com.h2database:h2'
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:${project.'jasyptSpringBootStarter.version'}"
+    implementation 'org.modelmapper:modelmapper:2.4.5'
+    implementation group: 'commons-beanutils', name: 'commons-beanutils', version: "${project.'commons.beanutils.version'}"
+
+    implementation project(":api-base")
+    implementation project(":common")
+    
+    testImplementation "io.github.openfeign:feign-okhttp"
+}
+
+springBoot {
+    mainClass = "com.kakao.search.apiservice.ApiServiceApplication"
+}
+
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = true
+}
+
+test {
+    minHeapSize = "4096m"
+    maxHeapSize = "4096m"
+}

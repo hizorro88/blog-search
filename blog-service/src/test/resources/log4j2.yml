@@ -1,0 +1,28 @@
+Configuration:
+  #  Properties:
+  #    Property:
+  #      - name: serviceLogPath
+  #        value: "/Users/jj"
+  Appenders:
+    Console:
+      - name: console
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p|%X{traceId:-}|%X{spanId:-}|%X{parentId:-} %4L --- [%15.15t] %-40.40c{1.} : %m%n%wEx"
+    RollingRandomAccessFile:
+      - name: serviceLogAppender
+        ThresholdFilter:
+          level: WARN
+        fileName: ${sys:user.home}/service.log
+        filePattern: "${sys:user.home}/%d{yyyy-MM}/%d{yyyy-MM-dd}.log.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p|%X{traceId:-}|%X{spanId:-}|%X{parentId:-} %4L --- [%15.15t] %-40.40c{1.} : %m%n%wEx"
+        Policies:
+          TimeBasedTriggeringPolicy:
+            Interval: 1
+            modulate: true
+  Loggers:
+    Root:
+      level: INFO
+      AppenderRef:
+        - ref: console
+        - ref: serviceLogAppender
