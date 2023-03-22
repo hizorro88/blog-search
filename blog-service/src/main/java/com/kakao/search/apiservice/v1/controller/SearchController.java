@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.text.ParseException;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -51,7 +52,8 @@ public class SearchController {
       @RequestParam(value = "query") String query,
       @RequestParam(value = "sort", required = false, defaultValue = "accuracy") SortType sort,
       @RequestParam(value = "page", required = false, defaultValue = "1") @Valid @Min(value = 1) @Max(value = 50) Integer page,
-      @RequestParam(value = "size", required = false, defaultValue = "10") @Valid @Min(value = 1) @Max(value = 80) Integer size) {
+      @RequestParam(value = "size", required = false, defaultValue = "10") @Valid @Min(value = 1) @Max(value = 80) Integer size)
+      throws ParseException {
 
     if (StringUtils.isEmpty(query)) {
       throw new BlogServiceException(BlogServiceExceptionEnum.입력오류_400);

@@ -13,7 +13,10 @@ import com.kakao.search.apiservice.repository.StatisticsRepository;
 import com.kakao.search.apiservice.service.BlogSearchService;
 import com.kakao.search.apiservice.service.feign.KakaoSearchService;
 import com.kakao.search.apiservice.service.feign.NaverSearchService;
+import com.kakao.search.common.util.DateTimeUtils;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.locks.ReentrantLock;
@@ -40,7 +43,8 @@ public class BlogSearchServiceImpl implements BlogSearchService {
   private final ReentrantLock lock = new ReentrantLock();
 
   @Override
-  public BlogSearchResponse blogSearch(String query, String sort, Integer page, Integer size) {
+  public BlogSearchResponse blogSearch(String query, String sort, Integer page, Integer size)
+      throws ParseException {
 
     BlogSearchResponse blogSearchResponse = kakaoSearchService.blogSearch(query, sort, page, size);
 
@@ -80,7 +84,8 @@ public class BlogSearchServiceImpl implements BlogSearchService {
     return blogSearchResponse;
   }
 
-  private BlogSearchResponse resConvert(NaverBlogSearchResponse naverBlogSearchResponse) {
+  private BlogSearchResponse resConvert(NaverBlogSearchResponse naverBlogSearchResponse)
+      throws ParseException {
 
     BlogSearchResponse blogSearchResponse = new BlogSearchResponse();
 
@@ -114,7 +119,8 @@ public class BlogSearchServiceImpl implements BlogSearchService {
           document.setTitle(item.getTitle());
         }
         if (item.getPostdate() != null) {
-          document.setDatetime(item.getPostdate());
+          Date date = DateTimeUtils.parseDate(item.getPostdate());
+          document.setDatetime(date);
         }
 
         documents.add(document);
